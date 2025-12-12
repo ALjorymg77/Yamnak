@@ -1,0 +1,799 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Tajawal", sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  direction: rtl;
+}
+
+.app-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  min-height: 100vh;
+}
+
+/* Header */
+.app-header {
+  background: #2c3e50;
+  color: white;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.back-btn,
+.menu-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* Login Wrapper */
+.login-wrapper {
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 100px);
+}
+
+.login-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Absher Logo */
+.absher-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.logo-bars {
+  display: flex;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.bar {
+  width: 8px;
+  background: #2d6a4f;
+  border-radius: 2px;
+}
+
+.bar:nth-child(1) {
+  height: 30px;
+}
+.bar:nth-child(2) {
+  height: 40px;
+}
+.bar:nth-child(3) {
+  height: 50px;
+}
+.bar:nth-child(4) {
+  height: 40px;
+}
+.bar:nth-child(5) {
+  height: 30px;
+}
+
+/* Child Icon */
+.child-icon {
+  font-size: 60px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Login Form */
+.login-title {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.login-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.input-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.login-input {
+  width: 100%;
+  padding: 14px 40px 14px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: "Tajawal", sans-serif;
+  transition: border-color 0.3s;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: #2d6a4f;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+
+.forgot-link {
+  display: block;
+  text-align: left;
+  color: #2d6a4f;
+  font-size: 13px;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  background: #2d6a4f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Tajawal", sans-serif;
+  transition: background 0.3s;
+}
+
+.login-btn:hover {
+  background: #1f4a36;
+}
+
+.divider {
+  text-align: center;
+  margin: 24px 0;
+  position: relative;
+  color: #999;
+  font-size: 14px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: #ddd;
+}
+
+.divider::before {
+  right: 0;
+}
+.divider::after {
+  left: 0;
+}
+
+.child-login-btn {
+  width: 100%;
+  padding: 14px;
+  background: white;
+  color: #2d6a4f;
+  border: 2px solid #2d6a4f;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Tajawal", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.child-login-btn:hover {
+  background: #f0f7f4;
+}
+
+.back-to-parent {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  color: #666;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: "Tajawal", sans-serif;
+  margin-top: 16px;
+}
+
+.error-msg {
+  color: #e74c3c;
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+  min-height: 20px;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Home Page Styles */
+.home-wrapper {
+  background: #f5f5f5;
+  min-height: calc(100vh - 60px);
+  padding: 0;
+}
+
+.home-top-bar {
+  background: white;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.menu-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.menu-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 24px;
+}
+
+.menu-bars span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #2d7a4e;
+  border-radius: 2px;
+}
+
+.top-icons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.lang-btn,
+.search-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  font-size: 20px;
+}
+
+.globe-icon,
+.search-icon {
+  font-size: 20px;
+  color: #2d7a4e;
+}
+
+.home-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo-bars-home {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+}
+
+.logo-bars-home .bar {
+  width: 6px;
+  background: #2d7a4e;
+  border-radius: 2px;
+}
+
+.logo-bars-home .bar:nth-child(1) {
+  height: 20px;
+}
+.logo-bars-home .bar:nth-child(2) {
+  height: 28px;
+}
+.logo-bars-home .bar:nth-child(3) {
+  height: 36px;
+}
+.logo-bars-home .bar:nth-child(4) {
+  height: 28px;
+}
+.logo-bars-home .bar:nth-child(5) {
+  height: 20px;
+}
+
+.vision-logo {
+  text-align: center;
+  padding: 12px;
+  background: white;
+}
+
+.home-search-container {
+  padding: 20px 20px 16px;
+  background: white;
+}
+
+.home-search-bar {
+  position: relative;
+  background: #f5f5f5;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.search-icon-in {
+  font-size: 18px;
+  color: #999;
+}
+
+.home-search-input {
+  flex: 1;
+  padding: 12px 12px 12px 8px;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-family: "Tajawal", sans-serif;
+}
+
+.home-search-input:focus {
+  outline: none;
+}
+
+.home-search-input::placeholder {
+  color: #999;
+}
+
+.services-grid {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.service-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.service-card:active {
+  transform: translateY(-2px);
+}
+
+.service-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.service-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+}
+
+/* Dashboard Content */
+.dashboard-content {
+  padding: 20px;
+}
+
+.family-header {
+  background: #2d6a4f;
+  color: white;
+  padding: 16px 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.return-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Tajawal", sans-serif;
+}
+
+.arrow {
+  font-size: 16px;
+}
+
+.search-bar {
+  margin-bottom: 16px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: "Tajawal", sans-serif;
+  background: #f9f9f9;
+}
+
+.family-count {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+/* Children List */
+.children-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.child-card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.child-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.child-info {
+  flex: 1;
+}
+
+.child-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.child-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 13px;
+  color: #666;
+}
+
+.child-emoji {
+  font-size: 40px;
+}
+
+/* Child Info Card */
+.child-info-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* Scan History */
+.scan-history {
+  margin-bottom: 24px;
+}
+
+.scan-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #2c3e50;
+}
+
+.scan-card {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  margin-bottom: 10px;
+}
+
+.scan-location {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 6px;
+}
+
+.scan-datetime {
+  font-size: 13px;
+  color: #666;
+  display: flex;
+  gap: 8px;
+}
+
+.separator {
+  color: #ccc;
+}
+
+.no-scans {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+}
+
+.show-id-btn {
+  width: 100%;
+  padding: 16px;
+  background: #2d6a4f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Tajawal", sans-serif;
+}
+
+/* Digital ID */
+.digital-id-wrapper {
+  padding: 20px;
+}
+
+.id-header {
+  background: #2d6a4f;
+  color: white;
+  padding: 16px 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.id-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  margin-top: 20px;
+}
+
+.id-profile {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.profile-image {
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  background: #f0f0f0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.label-small {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.profile-name-ar {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 4px;
+}
+
+.profile-name-en {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.blood-type {
+  font-size: 13px;
+  color: #666;
+}
+
+.id-section {
+  margin-bottom: 20px;
+}
+
+.section-label {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 6px;
+}
+
+.section-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.section-value.large {
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.info-item {
+  background: #f9f9f9;
+  padding: 14px;
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.info-icon {
+  font-size: 24px;
+}
+
+.info-content {
+  flex: 1;
+}
+
+.info-label {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.info-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.info-subvalue {
+  font-size: 12px;
+  color: #666;
+}
+
+.qr-section {
+  margin-top: 24px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.qr-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-height: 220px;
+  min-width: 220px;
+}
+
+#qrcode {
+  display: block;
+  margin: 0 auto;
+}
+
+.qr-timer {
+  margin-top: 16px;
+  font-size: 14px;
+  color: #666;
+}
+
+.timer-value {
+  font-weight: 700;
+  color: #e74c3c;
+  font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 30px 20px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
