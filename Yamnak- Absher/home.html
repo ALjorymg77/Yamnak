@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أبشر - يمناك</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <button class="back-btn" onclick="logout()">✕</button>
+            <h1 class="app-title">Abshir Workshop</h1>
+            <button class="menu-btn">⋯</button>
+        </header>
+
+        <!-- Main Content -->
+        <div class="home-wrapper">
+            <!-- Top Bar with Menu, Language, Search, Logo -->
+            <div class="home-top-bar">
+                <button class="menu-icon-btn">
+                    <div class="menu-bars">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+                
+                <div class="top-icons">
+                    <button class="lang-btn">
+                        <span class="globe-icon">🌐</span>
+                    </button>
+                    <button class="search-icon-btn">
+                        <span class="search-icon">🔍</span>
+                    </button>
+                </div>
+
+                <div class="home-logo">
+                    <div class="logo-bars-home">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vision 2030 Logo -->
+            <div class="vision-logo">
+                <img src="/images/image.png" alt="Vision 2030" style="height: 40px; opacity: 0.8;">
+            </div>
+
+            <!-- Search Bar -->
+            <div class="home-search-container">
+                <div class="home-search-bar">
+                    <span class="search-icon-in">🔍</span>
+                    <input type="text" placeholder="اكتب هنا للبحث" class="home-search-input">
+                </div>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="services-grid">
+                <!-- المركبات -->
+                <div class="service-card" onclick="alert('خدمة المركبات قريباً')">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 64 64" width="48" height="48">
+                            <path d="M10,30 L20,20 L44,20 L54,30 L54,45 L10,45 Z" fill="none" stroke="#2d7a4e" stroke-width="2.5"/>
+                            <circle cx="19" cy="45" r="4" fill="none" stroke="#2d7a4e" stroke-width="2.5"/>
+                            <circle cx="45" cy="45" r="4" fill="none" stroke="#2d7a4e" stroke-width="2.5"/>
+                            <line x1="24" y1="30" x2="40" y2="30" stroke="#2d7a4e" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="service-title">المركبات</div>
+                </div>
+
+                <!-- خدماتي -->
+                <div class="service-card" onclick="alert('خدماتي قريباً')">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 64 64" width="48" height="48">
+                            <rect x="14" y="10" width="36" height="44" rx="3" fill="none" stroke="#2d7a4e" stroke-width="2.5"/>
+                            <line x1="22" y1="20" x2="42" y2="20" stroke="#2d7a4e" stroke-width="2"/>
+                            <line x1="22" y1="28" x2="42" y2="28" stroke="#2d7a4e" stroke-width="2"/>
+                            <line x1="22" y1="36" x2="35" y2="36" stroke="#2d7a4e" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="service-title">خدماتي</div>
+                </div>
+
+                <!-- العمالة -->
+                <div class="service-card" onclick="alert('خدمة العمالة قريباً')">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 64 64" width="48" height="48">
+                            <circle cx="22" cy="20" r="6" fill="none" stroke="#2d7a4e" stroke-width="2.5"/>
+                            <path d="M20,45 Q20,32 32,32 Q44,32 44,45" fill="none" stroke="#2d7a4e" stroke-width="2.5"/>
+                            <circle cx="42" cy="20" r="6" fill="none" stroke="#2d7a4e" stroke-width="2.5"/>
+                            <path d="M32,42 Q32,32 42,32 Q52,32 52,42" fill="none" stroke="#2d7a4e" stroke-width="2.5"/>
+                        </svg>
+                    </div>
+                    <div class="service-title">العمالة</div>
+                </div>
+
+                <!-- أفراد الأسرة - Updated to navigate to parent dashboard -->
+                <div class="service-card" onclick="alert('خدمة أفراد الأسرة قريباً')">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 64 64" width="48" height="48">
+                            <circle cx="32" cy="18" r="6" fill="none" stroke="#2d7a4e" stroke-width="2.5"/>
+                            <path d="M20,45 Q20,32 32,32 Q44,32 44,45" fill="none" stroke="#2d7a4e" stroke-width="2.5"/>
+                            <circle cx="18" cy="24" r="4" fill="none" stroke="#2d7a4e" stroke-width="2"/>
+                            <circle cx="46" cy="24" r="4" fill="none" stroke="#2d7a4e" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="service-title">أفراد الأسرة</div>
+                </div>
+
+                <!-- يمناك -->
+                <div class="service-card" onclick="goToFamilyMembers()">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 64 64" width="48" height="48">
+                            <circle cx="32" cy="32" r="20" fill="none" stroke="#2d7a4e" stroke-width="2.5"/>
+                            <path d="M32,15 L32,32 L42,38" fill="none" stroke="#2d7a4e" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="service-title">يمناك</div>
+                </div>
+
+                <!-- مواعيد -->
+                <div class="service-card" onclick="alert('خدمة المواعيد قريباً')">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 64 64" width="48" height="48">
+                            <rect x="14" y="18" width="36" height="32" rx="2" fill="none" stroke="#2d7a4e" stroke-width="2.5"/>
+                            <line x1="14" y1="26" x2="50" y2="26" stroke="#2d7a4e" stroke-width="2.5"/>
+                            <line x1="24" y1="14" x2="24" y2="22" stroke="#2d7a4e" stroke-width="2.5"/>
+                            <line x1="40" y1="14" x2="40" y2="22" stroke="#2d7a4e" stroke-width="2.5"/>
+                        </svg>
+                    </div>
+                    <div class="service-title">مواعيد</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goToFamilyMembers() {
+            window.location.href = 'parent-dashboard.html';
+        }
+
+        function logout() {
+            localStorage.removeItem('parentLoggedIn');
+            window.location.href = 'index.html';
+        }
+
+        // Check if parent is logged in
+        if (!localStorage.getItem('parentLoggedIn')) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

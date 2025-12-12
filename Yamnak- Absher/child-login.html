@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل دخول الطفل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <button class="back-btn" onclick="goToHome()">✕</button>
+            <h1 class="app-title">Absher Yamnak</h1>
+            <button class="menu-btn">⋯</button>
+        </header>
+
+        <!-- Child Login Card -->
+        <div class="login-wrapper">
+            <div class="login-card">
+                <div class="child-icon">👦</div>
+                
+                <h2 class="login-title">تسجيل دخول الطفل</h2>
+                <p class="login-subtitle">أدخل رقم الهوية الوطنية</p>
+
+                <div class="input-group">
+                    <input type="text" id="childId" class="login-input" placeholder="رقم الهوية" maxlength="10">
+                    <span class="input-icon">🆔</span>
+                </div>
+
+                <div class="input-label">كلمة المرور</div>
+                <div class="input-group">
+                    <input type="password" id="childPassword" class="login-input" placeholder="كلمة المرور">
+                </div>
+
+                <button class="login-btn" onclick="handleChildLogin()">تسجيل الدخول</button>
+
+                <p class="error-msg" id="errorMsg"></p>
+
+                <button class="back-to-parent" onclick="goToHome()">
+                    العودة لتسجيل دخول ولي الأمر
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="database.js"></script>
+    <script>
+        function handleChildLogin() {
+            const childId = document.getElementById('childId').value.trim();
+            const password = document.getElementById('childPassword').value;
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (!childId || !password) {
+                errorMsg.textContent = 'الرجاء إدخال رقم الهوية وكلمة المرور';
+                return;
+            }
+
+            const child = findChildById(childId);
+            if (child) {
+                localStorage.setItem('currentChild', JSON.stringify(child));
+                window.location.href = 'child-profile.html';
+            } else {
+                errorMsg.textContent = 'رقم الهوية غير موجود في النظام';
+            }
+        }
+
+        function goToHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

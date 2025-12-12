@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الهوية الرقمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Using correct QRCode.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <button class="back-btn" onclick="goBack()">✕</button>
+            <h1 class="app-title">Absher Yamnak</h1>
+            <button class="menu-btn">⋯</button>
+        </header>
+
+        <!-- Digital ID Card -->
+        <div class="digital-id-wrapper">
+            <!-- ID Header -->
+            <div class="id-header">
+                <span class="header-label">هوية رقمية موثقة</span>
+                <button class="return-btn" onclick="goBack()">
+                    <span>الرجوع</span>
+                    <span class="arrow">◀</span>
+                </button>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" placeholder="ابحث بالاسم أو رقم الهوية" class="search-input" readonly>
+            </div>
+
+            <!-- ID Card -->
+            <div class="id-card">
+                <!-- Profile Section -->
+                <div class="id-profile">
+                    <div class="profile-image">
+                        <div class="avatar" id="avatarEmoji">👦</div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="label-small">الاسم الكامل</div>
+                        <h2 class="profile-name-ar" id="nameAr"></h2>
+                        <p class="profile-name-en" id="nameEn"></p>
+                        <div class="blood-type" id="bloodType">فصيلة الدم: A+</div>
+                    </div>
+                </div>
+
+                <!-- ID Number Section -->
+                <div class="id-section">
+                    <div class="section-label">رقم الهوية الوطنية</div>
+                    <div class="section-value large" id="idNumber"></div>
+                </div>
+
+                <!-- Info Grid -->
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-icon">👤</div>
+                        <div class="info-content">
+                            <div class="info-label">العمر</div>
+                            <div class="info-value" id="age"></div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📅</div>
+                        <div class="info-content">
+                            <div class="info-label">تاريخ الميلاد</div>
+                            <div class="info-value" id="birthDate"></div>
+                            <div class="info-subvalue" id="birthDateType">هجري</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-icon">🏥</div>
+                        <div class="info-content">
+                            <div class="info-label">الحالة الصحية :</div>
+                            <div class="info-value" id="healthStatus"> توحد </div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">🇸🇦</div>
+                        <div class="info-content">
+                            <div class="info-label">الجنسية</div>
+                            <div class="info-value" id="nationality">سعودي</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Using div instead of canvas for QRCode.js -->
+                <div class="qr-section">
+                    <div class="qr-container" id="qrcode"></div>
+                    <div class="qr-timer">
+                        <span>ينتهي خلال: </span>
+                        <span id="timer" class="timer-value">60</span>
+                        <span> ثانية</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="database.js"></script>
+    <script>
+        let timerInterval;
+        let secondsRemaining = 60;
+        let qrcodeInstance = null;
+        const ENCRYPTION_KEY = 'AbshirSecureKey2024';
+
+        function loadChildProfile() {
+            let child = JSON.parse(localStorage.getItem('selectedChild')) || 
+                       JSON.parse(localStorage.getItem('currentChild'));
+            
+            if (!child) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Set avatar emoji
+            const emoji = child.sexAr === 'ذكر' ? '👦' : '👧';
+            document.getElementById('avatarEmoji').textContent = emoji;
+
+            // Set profile info
+            document.getElementById('nameAr').textContent = child.fullNameAr;
+            document.getElementById('nameEn').textContent = child.fullName;
+            document.getElementById('idNumber').textContent = child.id;
+            document.getElementById('age').textContent = child.age + ' سنوات';
+            document.getElementById('birthDate').textContent = child.birthDate;
+            document.getElementById('nationality').textContent = child.nationalityAr;
+
+            // Generate initial QR code
+            generateQRCode(child);
+
+            // Start timer
+            startTimer(child);
+        }
+
+        function encryptData(data) {
+            return CryptoJS.AES.encrypt(JSON.stringify(data), ENCRYPTION_KEY).toString();
+        }
+
+        function generateQRCode(child) {
+            const qrContainer = document.getElementById('qrcode');
+            const timestamp = Date.now();
+            
+            // Prepare data for QR code
+            const qrData = {
+                id: child.id,
+                name: child.fullNameAr,
+                fatherName: child.fatherName,
+                birthDate: child.birthDate,
+                nationality: child.nationalityAr,
+                timestamp: timestamp,
+                expires: timestamp + 60000,
+                hash: CryptoJS.SHA256(child.id + timestamp).toString()
+            };
+
+            // Encrypt the data
+            const encryptedData = encryptData(qrData);
+
+            // Clear previous QR code
+            qrContainer.innerHTML = '';
+
+            // Generate new QR code
+            try {
+                qrcodeInstance = new QRCode(qrContainer, {
+                    text: encryptedData,
+                    width: 200,
+                    height: 200,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+                console.log('[v0] QR Code generated successfully');
+            } catch (error) {
+                console.error('[v0] QR Code generation error:', error);
+            }
+        }
+
+        function startTimer(child) {
+            secondsRemaining = 60;
+            updateTimerDisplay();
+
+            if (timerInterval) clearInterval(timerInterval);
+
+            timerInterval = setInterval(() => {
+                secondsRemaining--;
+                updateTimerDisplay();
+
+                if (secondsRemaining <= 0) {
+                    console.log('[v0] Regenerating QR code');
+                    generateQRCode(child);
+                    secondsRemaining = 60;
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            document.getElementById('timer').textContent = secondsRemaining;
+        }
+
+        function goBack() {
+            if (timerInterval) clearInterval(timerInterval);
+            
+            if (localStorage.getItem('currentChild')) {
+                localStorage.removeItem('currentChild');
+                window.location.href = 'child-login.html';
+            } else {
+                window.location.href = 'child-details.html';
+            }
+        }
+
+        loadChildProfile();
+    </script>
+</body>
+</html>
